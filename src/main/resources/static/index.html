@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+	<h2>도서관리시스템</h2>
+	<hr />
+	<div id="box">
+		{{msg}}
+	</div>
+	
+	<div id="box2">
+		<span v-bind:title="name">
+			Hello
+		</span>
+	</div>
+	
+	<div id="box3">
+		<span v-if="seen">내가 보입니까?</span>
+	</div>
+	
+	<div id="box4">
+		<ol>
+			<li v-for="todo in todos">{{todo.text}}</li>
+		</ol>
+	</div>
+	
+	<table id="book" border="1">
+		<thead>
+			<tr>
+				<th>도서번호</th>
+				<th>도서명</th>
+				<th>도서가격</th>
+				<th>출판사명</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr v-for="b in list">
+				<td>{{b.bookid}}</td>
+				<td>{{b.bookname}}</td>
+				<td>{{b.price}}</td>
+				<td>{{b.publisher}}</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div id="box5">
+		<p>{{msg}}</p>
+		<button v-on:click="pro">거꾸로 뒤집기</button>
+	</div>	
+	
+	<div id="box6">
+		<p>{{name}}</p>
+		<input type="text" v-model="name" />
+	</div>
+	
+	<script>
+		var box = new Vue({
+			el:"#box",
+			data:{
+				msg:"Hello VueJS!"
+			}
+		});
+		
+		var box2 = new Vue({
+			el:"#box2",
+			data:{
+				name:"홍길동 "+new Date().toLocaleString()
+			}
+		});
+		
+		var box3 = new Vue({
+			el:"#box3",
+			data: {seen:true}
+		});
+		
+		var box4 = new Vue({
+			el: "#box4",
+			data: {
+				todos : [
+					{ text: 'Learn JavaScript' },
+			    	{ text: 'Learn Vue' },
+			    	{ text: 'Build something awesome' }
+				]
+			}
+		});
+		
+		var book = new Vue({
+			el: "#book",
+			data: {
+				list: [
+				  { bookid: 1,bookname: '축구의 역사',price: 9000,publisher: '굿스포츠'},
+			      { bookid: 2,bookname: '축구아는 여자',price: 13000,publisher: '나무수'},
+			      { bookid: 3,bookname: '축구의 이해',price: 22000,publisher: '대한미디어'}
+				]
+			}
+		});
+		
+		var box5 = new Vue({
+			el:"#box5",
+			data:{
+				msg:"Hello"
+			},
+			methods:{
+				pro: function(){
+					this.msg = this.msg.split('').reverse().join('');
+				}
+			}
+		});
+		
+		var box6 = new Vue({
+			el:"#box6",
+			data:{
+				name:"홍길동"
+			},
+			methods:{}
+		});
+	</script>
+</body>
+</html>
